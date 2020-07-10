@@ -6,10 +6,14 @@ public class Main {
 	public static void main(String[] args) throws InterruptedException {
 		
 		//Create our new countdown threads
-		Thread t0 = new Thread(new Countdown());
-		Thread t1 = new Thread(new Countdown());
-		Thread t2 = new Thread(new Countdown());
-		Thread t3 = new Thread(new Countdown());
+		Countdown down0 = new Countdown();
+		Countdown down1 = new Countdown();
+		Countdown down2 = new Countdown();
+		Countdown down3 = new Countdown();
+		Thread t0 = new Thread(down0);
+		Thread t1 = new Thread(down1);
+		Thread t2 = new Thread(down2);
+		Thread t3 = new Thread(down3);
 		
 		
 		//start the threads one after the other
@@ -23,11 +27,31 @@ public class Main {
 		
 		
 		//start console reader to print and read console simultaneously
-		Thread read = new Thread(new ConsoleReader());
-		read.start();
+		ConsoleReader reader = new ConsoleReader();
+		Thread tRead = new Thread(reader);
+		tRead.start();
+		
 		
 		//loop until one thread stops
-		while(read.isAlive()) {
+		while(tRead.isAlive()) {
+			
+			switch(reader.getThreadNumber()) {
+				case 0:
+					down0.restartCountdown();
+					break;
+				case 1:
+					down1.restartCountdown();
+					break;
+				case 2:
+					down2.restartCountdown();
+					break;
+				case 3:
+					down3.restartCountdown();
+					break;
+				default:
+					break;
+			}
+			
 			
 			if(!t0.isAlive() || !t1.isAlive() || !t2.isAlive() || !t3.isAlive()) {
 				break;
