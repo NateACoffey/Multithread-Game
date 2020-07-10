@@ -32,9 +32,13 @@ public class Main {
 		tRead.start();
 		
 		
+		//timer start
+		long startTime = System.nanoTime();
+		
 		//loop until one thread stops
 		while(tRead.isAlive()) {
 			
+			//grabs console input
 			switch(reader.getThreadNumber()) {
 				case 0:
 					down0.restartCountdown();
@@ -60,12 +64,18 @@ public class Main {
 		}
 		
 		
+		//timer end
+		long endTime = System.nanoTime();
+		
+		
 		//stop all threads
 		t0.interrupt();
 		t1.interrupt();
 		t2.interrupt();
 		t3.interrupt();
 		
+		
+		System.out.println("You lasted: " + (endTime - startTime) / 1000000000.0 + " seconds.");
 		
 	}
 
