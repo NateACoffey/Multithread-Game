@@ -73,9 +73,12 @@ public class Main {
 		t1.interrupt();
 		t2.interrupt();
 		t3.interrupt();
+		tRead.interrupt();
 		
 		
 		System.out.println("You lasted: " + (endTime - startTime) / 1000000000.0 + " seconds.");
+		
+		System.out.println("\nPress enter to quit.");
 		
 	}
 

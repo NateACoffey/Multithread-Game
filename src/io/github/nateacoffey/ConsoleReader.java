@@ -18,7 +18,8 @@ public class ConsoleReader implements Runnable {
 		
 		try {
 			//thread end once y is entered
-			while(!input.equalsIgnoreCase("q")) {
+			while(!input.equalsIgnoreCase("q") && !Thread.interrupted()) {
+				
 				input = br.readLine();
 				
 				try {
