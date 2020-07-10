@@ -8,9 +8,9 @@ public class Countdown implements Runnable {
 	
 	public void run() {
 		
-		//set countdown to random int between 60 - 99
+		//set countdown to random int between 60 - 100
 		countdown = new Random().nextInt(41) + 60;
-		int sleepCounter = 500;
+		int sleepCounter = 400;
 		
 		try {
 			
@@ -18,14 +18,20 @@ public class Countdown implements Runnable {
 				
 				--countdown;
 				
-				//prints random int between 60 - 99
+				//print countdown value
 				System.out.println(Thread.currentThread().getName() + " " + countdown);
 				
+				//stops thread if countdown reaches 0
 				if(countdown < 1) {
 					Thread.currentThread().interrupt();
 				}
 				
-				Thread.sleep( (sleepCounter -= 2) );//run every half second
+				//lower sleep counter by 2 until it hits zero
+				if(sleepCounter >= 2) {
+					sleepCounter -= 2;
+				}
+				
+				Thread.sleep(sleepCounter);
 				
 			}
 			
@@ -40,6 +46,5 @@ public class Countdown implements Runnable {
 	public void restartCountdown() {
 		countdown = 100;
 	}
-	
 	
 }
